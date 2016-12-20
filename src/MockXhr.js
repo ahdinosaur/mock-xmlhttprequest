@@ -36,6 +36,7 @@ var MockXhr = function() {
   this.requestHeaders = new HeadersContainer();
   this._upload = new EventTarget(this);
   this._response = this._networkErrorResponse();
+  this.response
 
   // Hook for XMLHttpRequest creation
   if (typeof MockXhr.onCreate === 'function') {
@@ -57,7 +58,7 @@ MockXhr.prototype = Object.create(EventTarget.prototype, {
   },
   responseType: {
     get: function() { return ''; },
-    set: function() { throw new Error('Operation not supported.'); },
+    set: function() { console.error('mock-xmlhttprequest: `xhr.responseType = ` not supported.'); },
   },
   response: {
     get: function() { return this._getResponseText(); },
